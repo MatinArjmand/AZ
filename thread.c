@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <pthread.h>
 #include <unistd.h>
+#include <sys/wait.h>
+#include <time.h>
+#include <pthread.h>
 
 #define BUFFER_SIZE 2000
 #define NUMS 100000
