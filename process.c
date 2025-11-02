@@ -35,7 +35,7 @@ int main() {
         close(pipefd[0]); // close reading
         for (int i = 0; i < NUMS; i++) {
             write(pipefd[1], &i, sizeof(i));
-            printf("write %d\n", i);
+            printf("produced %d\n", i);
             fflush(stdout);
             usleep(50000);
         }
@@ -51,10 +51,11 @@ int main() {
         int value;
         while (read(pipefd[0], &value, sizeof(value)) > 0) {
             sum += value;
-            printf("consumer result: sum = %d\n", sum);
+            printf("consumed %d",value);
             fflush(stdout);
             usleep(50000);
         }
+        printf("consumer result: sum = %d\n", sum);
         close(pipefd[0]);
         exit(0);
     }
