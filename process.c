@@ -37,6 +37,7 @@ int main() {
             write(pipefd[1], &i, sizeof(i));
             printf("write %d\n", i);
             fflush(stdout);
+            usleep(50000);
         }
         close(pipefd[1]);
         wait(NULL);
@@ -52,7 +53,8 @@ int main() {
             sum += value;
         }
         printf("consumer result: sum = %d\n", sum);
-
+        fflush(stdout);
+        usleep(50000);
         close(pipefd[0]);
         exit(0);
     }
