@@ -27,11 +27,11 @@ int main() {
 
     if (pid > 0) {
         // producer
-        printf("producer started\n");
+        //printf("producer started\n");
         close(pipefd[0]); // close reading
         for (int i = 0; i < NUMS; i++) {
             write(pipefd[1], &i, sizeof(i));
-            printf("produced %d\n", i);
+            //printf("produced %d\n", i);
             //usleep(100000);
         }
         close(pipefd[1]);
@@ -39,16 +39,16 @@ int main() {
 
     } else {    // pid = 0
         // consumer
-        printf("consumer started\n");
+        //printf("consumer started\n");
         close(pipefd[1]); // close writing
 
         int value;
         while (read(pipefd[0], &value, sizeof(value)) > 0) {
             sum += value;
-            printf("consumed %d\n", value);
+            //printf("consumed %d\n", value);
             //usleep(100000);
         }
-        printf("consumer result: sum = %d\n", sum);
+        //printf("consumer result: sum = %d\n", sum);
         close(pipefd[0]);
         exit(0);
     }

@@ -16,7 +16,7 @@ pthread_cond_t cond_full = PTHREAD_COND_INITIALIZER;
 pthread_cond_t cond_empty = PTHREAD_COND_INITIALIZER;
 
 void* producer(void* arg) {
-    printf("producer started\n");
+    //printf("producer started\n");
     for (int i = 0; i < NUMS; i++) {
         pthread_mutex_lock(&mutex);
         while (count == BUFFER_SIZE) {
@@ -24,7 +24,7 @@ void* producer(void* arg) {
             pthread_cond_wait(&cond_empty, &mutex);
         }
         buffer[count] = i;
-        printf("produced %d\n", i);
+        //printf("produced %d\n", i);
         count++;
         //usleep(100000);
         pthread_cond_signal(&cond_full);
@@ -34,7 +34,7 @@ void* producer(void* arg) {
 }
 
 void* consumer(void* arg) {
-    printf("consumer started\n");
+    //printf("consumer started\n");
     int sum = 0;
     int consumed_value;
     for (int i = 0; i < NUMS; i++) {
@@ -45,14 +45,14 @@ void* consumer(void* arg) {
         }
         consumed_value = buffer[count - 1];
         count--;
-        printf("consumed %d\n", consumed_value);
+        //printf("consumed %d\n", consumed_value);
         sum += consumed_value;
         //usleep(100000);
         pthread_cond_signal(&cond_empty);
         pthread_mutex_unlock(&mutex);
     }
 
-    printf("consumer result: sum = %d\n", sum);
+    //printf("consumer result: sum = %d\n", sum);
     return NULL;
 }
 
